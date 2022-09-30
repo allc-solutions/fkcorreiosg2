@@ -120,13 +120,12 @@ class CorreiosClass {
 
         foreach ($dados as $reg) {
 
-            if ($servicos['pesquisaCorreios'] == '') {
+            if($this->codServico==$reg['cod_servico'])
+            {
                 $servicos['pesquisaCorreios'] = $reg['cod_servico'];
-            }else {
-                $servicos['pesquisaCorreios'] .= ','.$reg['cod_servico'];
-            }
+                $servicos['servicos'][$reg['cod_servico']] = $reg['id'];
+            }           
 
-            $servicos['servicos'][$reg['cod_servico']] = $reg['id'];
         }
 
         $parm = array(
@@ -152,11 +151,8 @@ class CorreiosClass {
             $retornos = $arrayRetorno->CalcPrecoPrazoResult->Servicos->cServico;
 
             // Se somente 1 servico dos Correios ativo
-            if (count($retornos) == 1) {
-                $retornosTmp[] = $retornos;
-            }else {
-                $retornosTmp = $retornos;
-            }
+
+            $retornosTmp[] = $retornos;
 
             foreach ($retornosTmp as $retorno) {
 
